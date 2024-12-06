@@ -18,4 +18,8 @@ app.get('/home',(req, res)=>{
     res.send("This will be the home page");
 })
 
+app.get('/home/me',(req, res)=>{
+    res.send("This will be about me");
+})
+
 module.exports = app;
