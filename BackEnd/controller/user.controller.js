@@ -2,6 +2,6 @@ const { model } = require('mongoose');
 const userModel = require ('../models/user.model');
 
 
-module.exports.register = async (req, res,next) => {
+module.exports.registerUser = async (req, res,next) => {
     
 };
