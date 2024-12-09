@@ -10,8 +10,11 @@ router.post('/register', [
 ]
 
 ,(req, res) => {
-    userController.register(req,res);
+    userController.registerUser(req,res);
 });
+
+
+
 
 
 
