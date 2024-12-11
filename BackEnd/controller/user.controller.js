@@ -1,22 +1,22 @@
 const { model } = require('mongoose');
-const userModel = require ('../models/user.model');
+const userModel = require('../models/user.model');
 const { validationResult } = require('express-validator');
 
 
-module.exports.registerUser = async (req, res,next) => {
+module.exports.registerUser = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({errors: errors.array()});
+        return res.status(400).json({ errors: errors.array() });
     }
     const { fullname, email, password } = req.body;
 
     const hashedPassword = await userModel.hashPassword(password);
 
-    const user = await userModel.create({fullname, email, password : hashedPassword});
+    const user = await userModel.create({ fullname, email, password: hashedPassword });
 
     const token = user.generateAuthToken();
 
-    res.status(201).json({token, user});
+    res.status(201).json({ token, user });
 
 
 };
