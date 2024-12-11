@@ -1,6 +1,7 @@
 const { model } = require('mongoose');
 const userModel = require('../models/user.model');
 const { validationResult } = require('express-validator');
+const userServices = require('../services/user.services');
 
 
 module.exports.registerUser = async (req, res, next) => {
@@ -12,7 +13,10 @@ module.exports.registerUser = async (req, res, next) => {
 
     const hashedPassword = await userModel.hashPassword(password);
 
-    const user = await userModel.create({ fullname, email, password: hashedPassword });
+    const user = await userServices.createUser({ fullname:{
+        firstname: fullname.firstname,
+        lastname: fullname.lastname,
+    }, email, password: hashedPassword });
 
     const token = user.generateAuthToken();
 
